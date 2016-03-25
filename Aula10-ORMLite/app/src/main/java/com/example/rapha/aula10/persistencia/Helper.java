@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class Helper extends OrmLiteSqliteOpenHelper{
     private static final String NOME = "ayty";
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 6;
 
     public Helper(Context context) {
         super(context, NOME, null, VERSAO);
@@ -26,9 +26,9 @@ public class Helper extends OrmLiteSqliteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
+            TableUtils.createTable(connectionSource, Disciplina.class);
             TableUtils.createTable(connectionSource, Professor.class);
             TableUtils.createTable(connectionSource, Aluno.class);
-            TableUtils.createTable(connectionSource, Disciplina.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,6 +40,7 @@ public class Helper extends OrmLiteSqliteOpenHelper{
             TableUtils.dropTable(connectionSource, Aluno.class, true);
             TableUtils.dropTable(connectionSource, Professor.class, true);
             TableUtils.dropTable(connectionSource, Disciplina.class, true);
+            onCreate(sqLiteDatabase, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();
         }

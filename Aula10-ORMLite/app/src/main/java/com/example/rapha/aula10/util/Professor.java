@@ -14,7 +14,7 @@ import java.util.Collection;
 public class Professor {
     @DatabaseField(generatedId = true)
     private int id;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Disciplina disciplina;
     @DatabaseField
     private String nome;
